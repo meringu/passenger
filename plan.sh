@@ -6,7 +6,7 @@
 # and `pkg_version` to define the fully-qualified package name, which determines
 # where the package is installed to on disk, how it is referred to in package
 # metadata, and so on.
-pkg_name=meringu/passenger
+pkg_name=passenger
 
 # Required unless overridden by the `HAB_ORIGIN` environment variable.
 # The origin is used to denote a particular upstream of a package.
@@ -14,7 +14,7 @@ pkg_origin=meringu
 
 # Required.
 # Sets the version of the package.
-pkg_version="0.1.0"
+pkg_version="5.1.7"
 
 # Optional.
 # The name and email address of the package maintainer.
@@ -30,7 +30,7 @@ pkg_version="0.1.0"
 # will work. Typically, the relative path for the URL is partially constructed
 # from the pkg_name and pkg_version values; however, this convention is not
 # required.
-pkg_source="http://some_source_url/releases/${pkg_name}-${pkg_version}.tar.gz"
+pkg_source="http://s3.amazonaws.com/phusion-passenger/releases/${pkg_name}-${pkg_version}.tar.gz"
 
 # Optional.
 # The resulting filename for the download, typically constructed from the
@@ -43,7 +43,7 @@ pkg_source="http://some_source_url/releases/${pkg_name}-${pkg_version}.tar.gz"
 # and using the sha256sum or gsha256sum tools. Also, if you do not have
 # do_verify() overridden, and you do not have the correct sha-256 sum, then the
 # expected value will be shown in the build output of your package.
-pkg_shasum="TODO"
+pkg_shasum="2b40a00a3fdc90a6acf784319f60fd53549f036ffc99fcbb23a0658cb7e2b215"
 
 # Optional.
 # An array of package dependencies needed at runtime. You can refer to packages
@@ -71,7 +71,7 @@ pkg_shasum="TODO"
 # An array of paths, relative to the final install of the software, where
 # binaries can be found. Used to populate PATH for software that depends on
 # your package.
-# pkg_bin_dirs=(bin)
+pkg_bin_dirs=(bin)
 
 # Optional.
 # An array of paths, relative to the final install of the software, where
@@ -223,7 +223,7 @@ do_prepare() {
 # if you have additional configuration changes to make or other software to
 # build and install as part of building your package.
 do_build() {
-  do_default_build
+  return 0
 }
 
 # The default implementation runs nothing during post-compile. An example of a
@@ -243,7 +243,7 @@ do_check() {
 # specific directories in your package, or installing pre-built binaries into
 # your package.
 do_install() {
-  do_default_install
+  return 0
 }
 
 # The default implementation is to strip any binaries in $pkg_prefix of their
